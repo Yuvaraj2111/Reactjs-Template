@@ -1,22 +1,27 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-// REF: https://firebase.google.com/docs/web/setup#available-libraries
-import { getFirestore } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
-// import { getStorage } from 'firebase/storage';
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "firebase/compat/storage";
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyA45vxq5FwDXyRqby2E-AsOg4Iexmv7mYs',
-  authDomain: 'cra-template-mugilan.firebaseapp.com',
-  projectId: 'cra-template-mugilan',
-  storageBucket: 'cra-template-mugilan.appspot.com',
-  messagingSenderId: '116878559690',
-  appId: '1:116878559690:web:a37d549646abe44280e733',
+  apiKey: "AIzaSyCHZm5j4p1Od1TrHfQTBFtQN-prZqyd9KU",
+  authDomain: "sd-lab-5d7d1.firebaseapp.com",
+  projectId: "sd-lab-5d7d1",
+  storageBucket: "sd-lab-5d7d1.appspot.com",
+  messagingSenderId: "332256190276",
+  appId: "1:332256190276:web:9644ebe25efef4c4cd0111",
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-export const auth = getAuth(app);
-// export const storage = getStorage(app);
+let Firebase;
+
+if (firebase.apps.length === 0) {
+  Firebase = firebase.initializeApp(firebaseConfig);
+}
+
+export default Firebase;

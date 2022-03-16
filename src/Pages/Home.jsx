@@ -1,22 +1,41 @@
-import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import React, { useEffect, useState } from "react";
+import { Card } from "react-bootstrap";
+
+import Firebase from "../Utils/firebase";
+
+const db = Firebase.firestore();
 
 const HomePage = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function getData() {
+    let temp = [];
+    await db
+      .collection("user")
+      .get()
+      .then((e) => {
+        e.forEach((item) => {
+          temp.push(item.data());
+        });
+        setData(temp);
+      });
+  }
+
   return (
     <>
-      <main>
-        <h2>Welcome to the homepage!</h2>
-
-        <p>You can do this, I believe in you.</p>
-
-        <Button as={Link} to='/about'>
-          Go To About
-        </Button>
-      </main>
-
-      <nav>
-        <Link to='/about'>About</Link>
-      </nav>
+      {data.map((e, i) => {
+        return (
+          <Card key={i}>
+            <Card.Text>{e.id}</Card.Text>
+            <Card.Text>{e.name}</Card.Text>
+            <Card.Text>{e.email}</Card.Text>
+            <Card.Text>{e.mobile}</Card.Text>
+          </Card>
+        );
+      })}
     </>
   );
 };
